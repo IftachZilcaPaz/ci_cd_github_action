@@ -35,7 +35,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.SECRET_KEY }}
-          aws-resion: us-east-1
+          aws-region: us-east-1
       
       - name: Create package
         run: zip -r ${{ env.PACKAGE_NAME}} ./ -x *.git*
