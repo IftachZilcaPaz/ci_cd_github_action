@@ -3,7 +3,7 @@ name: Deploy EC2 Instance
 on:
   push:
     branches:
-      - main  # Trigger on push to main branch
+      - main  # Trigger on push to main branch 
     paths-ignore:
       - '.github/workflows/s3Bucket.yml'
 
