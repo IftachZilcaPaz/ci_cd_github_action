@@ -1,6 +1,11 @@
 name: Deploy Nginx on Self-hosted Runner
 
-on: [push]
+on:
+  push:
+    branches:
+      - main  # Trigger on push to main branch 
+    paths:
+      - '.github/workflows/new.yml'
 
 jobs:
   deploy-nginx:
