@@ -19,6 +19,15 @@ jobs:
         aws-secret-access-key: ${{ secrets.SECRET_KEY }}
         aws-region: us-east-1
 
+    - name: Retrieve the Latest Ubuntu AMI ID
+      id: get-ami
+      run: |
+        AMI_ID=$(aws ec2 describe-images \
+          --filters "Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-*-amd64*" "Name=state,Values=available" \
+          --query 'Images | sort_by(@, &CreationDate) | [-1].ImageId' \
+          --output text)
+        echo "::set-output name=AMI_ID::$AMI_ID"
+
     - name: Launch EC2 Instance
       run: |
-        aws ec2 run-instances --image-id ami-0c55b159cbfafe1f0 --count 1 --instance-type t2.micro --key-name MyKeyPair --security-group-ids sg-903004f8 --subnet-id subnet-6e7f829e
+        aws ec2 run-instances --image-id ${{ steps.get-ami.outputs.AMI_ID }} --count 1 --instance-type t2.micro --key-name MyKeyPair --security-group-ids sg-903004f8 --subnet-id subnet-6e7f829e
