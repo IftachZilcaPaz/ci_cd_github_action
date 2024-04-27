@@ -26,3 +26,9 @@ jobs:
 
     - name: Print the status of Nginx
       run: sudo systemctl status nginx | cat # Using 'cat' to avoid failing due to 'systemctl' exit codes
+
+    - name: Sleep for 20 seconds
+      run: sleep 20
+
+    - name: Stop Nginx
+      run: sudo systemctl stop nginx
