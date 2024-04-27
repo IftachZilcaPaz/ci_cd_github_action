@@ -10,6 +10,7 @@ on:
 jobs:
   deploy-nginx:
     runs-on: self-hosted # Ensure this matches the label of your self-hosted runner
+    # to run on a specific self-hosted need to add a label and then >> runs-on: [self-hosted, linux-large-ram]
 
     steps:
     - name: Check out repository code
