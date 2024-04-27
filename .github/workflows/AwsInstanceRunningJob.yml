@@ -5,7 +5,7 @@ on:
     branches:
       - main  # Trigger on push to main branch 
     paths:
-      - '.github/workflows/new.yml'
+      - '.github/workflows/AwsInstanceRunningJob.yml'
 
 jobs:
   deploy-nginx:
