@@ -22,6 +22,24 @@ jobs:
         aws-secret-access-key: ${{ secrets.SECRET_KEY }}
         aws-region: us-east-1
 
+    - name: Provision AWS Infrastructure
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY }}
+        AWS_DEFAULT_REGION: 'us-east-1' # Replace with your desired AWS region
+      run: |
+        VPC_ID=$(aws ec2 create-vpc --cidr-block 10.0.0.0/16 --query 'Vpc.VpcId' --output text)
+        echo "::set-output name=VPC_ID::$VPC_ID"
+        
+        SUBNET_ID=$(aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.0.1.0/24 --query 'Subnet.SubnetId' --output text)
+        echo "::set-output name=SUBNET_ID::$SUBNET_ID"
+        
+        SG_ID=$(aws ec2 create-security-group --group-name my-security-group --description "My security group" --vpc-id $VPC_ID --query 'GroupId' --output text)
+        echo "::set-output name=SG_ID::$SG_ID"
+        
+        aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 22 --cidr 0.0.0.0/0
+
+
     - name: Retrieve the Latest Ubuntu AMI ID
       id: get-ami
       run: |
@@ -33,4 +51,4 @@ jobs:
 
     - name: Launch EC2 Instance
       run: |
-        aws ec2 run-instances --image-id ${{ steps.get-ami.outputs.AMI_ID }} --count 1 --instance-type t2.micro --key-name MyKeyPair --security-group-ids sg-903004f8 --subnet-id subnet-6e7f829e
+        aws ec2 run-instances --image-id ${{ steps.get-ami.outputs.AMI_ID }} --count 1 --instance-type t2.micro --key-name MyKeyPair --security-group-ids ${{ steps.get-ami.outputs.SG_ID }} --subnet-id ${{ steps.get-ami.outputs.SUBNET_ID }}
