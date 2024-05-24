@@ -1,30 +1,3 @@
-# Summary
-
-## Trigger
-The workflow is triggered by a push to the main branch that affects the `.github/workflows/s3Bucket.yml` file.
-
-## Jobs
-### Job: build
-- **Runs on**: `ubuntu-latest`
-
-### Steps:
-1. **Checkout code**:
-   - Uses the `actions/checkout@v4` action to checkout the repository code.
-
-2. **AWS CLI Version**:
-   - Runs a command to check the AWS CLI version using the runner's shell.
-
-3. **Configure AWS Credentials**:
-   - Uses the `aws-actions/configure-aws-credentials@v2` action to configure AWS credentials from GitHub secrets.
-
-4. **Create Package**:
-   - Runs a command to create a ZIP package of the repository, excluding `.git` files.
-
-5. **Send Package**:
-   - Runs a command to upload the created package to an S3 bucket.
-
-## Workflow File: `.github/workflows/s3Bucket.yml`
-
 ```yaml
 name: CI/CD AWS
 env:
@@ -70,3 +43,31 @@ jobs:
 
       - name: Send Package
         run: aws s3 cp ${{ env.PACKAGE_NAME }} s3://${{ env.BUCKET_NAME }}/
+```
+
+# Summary
+
+## Trigger
+The workflow is triggered by a push to the main branch that affects the `.github/workflows/s3Bucket.yml` file.
+
+## Jobs
+### Job: build
+- **Runs on**: `ubuntu-latest`
+
+### Steps:
+1. **Checkout code**:
+   - Uses the `actions/checkout@v4` action to checkout the repository code.
+
+2. **AWS CLI Version**:
+   - Runs a command to check the AWS CLI version using the runner's shell.
+
+3. **Configure AWS Credentials**:
+   - Uses the `aws-actions/configure-aws-credentials@v2` action to configure AWS credentials from GitHub secrets.
+
+4. **Create Package**:
+   - Runs a command to create a ZIP package of the repository, excluding `.git` files.
+
+5. **Send Package**:
+   - Runs a command to upload the created package to an S3 bucket.
+
+## Workflow File: `.github/workflows/s3Bucket.yml`
