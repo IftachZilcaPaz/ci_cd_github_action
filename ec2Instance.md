@@ -61,7 +61,7 @@ jobs:
       run: |
         aws ec2 run-instances --image-id ${{ steps.get-ami.outputs.AMI_ID }} --count 1 --instance-type t2.micro --key-name MyKeyPair --security-group-ids ${{ steps.get-all.outputs.SG_ID }} --subnet-id ${{ steps.get-all.outputs.SUBNET_ID }}
 
-
+```
 # Summary
 
 ## Trigger
