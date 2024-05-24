@@ -1,4 +1,6 @@
-![image](https://github.com/IftachZilcaPaz/ci_cd_github_action_aws/assets/151572520/09d55466-1e11-4419-8f4c-bd8316fa0acb)
+![image](https://github.com/IftachZilcaPaz/ci_cd_github_action_aws/assets/151572520/c4b1a850-020a-42af-942a-37f0a8796a49)
+
+
 
 
 ---
