@@ -15,27 +15,52 @@
 
 ---
 
-lets talk about this project:
+# CI/CD GitHub Actions for AWS
 
-this project is a github actions repo that work and connect to AWS
+This project uses GitHub Actions to deploy a web page on an AWS instance using NGINX.
 
-first guthub action how it work:
-**".github/workflows/AwsInstanceRunningJob.yml"**
+## Table of Contents
 
-this action will deploy on you aws instance a website page with nginx.
+1. [Introduction](#introduction)
+2. [GitHub Actions Workflow](#github-actions-workflow)
+3. [Self-Hosted Runner Setup](#self-hosted-runner-setup)
+4. [Using the Self-Hosted Runner](#using-the-self-hosted-runner)
+5. [Diagram](#diagram)
 
-steps:
-- first if you have an instance copy the ip of this instance, if not, please create one and copy his ip.
-- next in settings go to actions, then to runners, the click "new self hosted runner":
-  
-<img width="1282" alt="image" src="https://github.com/IftachZilcaPaz/ci_cd_github_action_aws/assets/151572520/79e0e497-8600-454b-8e3d-55b37e47583c">
+## Introduction
 
-- then choose the OS:
-  
-<img width="812" alt="image" src="https://github.com/IftachZilcaPaz/ci_cd_github_action_aws/assets/151572520/5a9775dd-ed99-4aca-b905-14c33d93ec81">
+This repository demonstrates how to use GitHub Actions to connect to AWS and deploy a website on an EC2 instance using NGINX. The process involves setting up a self-hosted runner on your EC2 instance and running the GitHub Actions workflow to deploy the web page.
 
-- then do those steps on youe instance:
+## GitHub Actions Workflow
 
+The workflow file is located at `.github/workflows/AwsInstanceRunningJob.yml`.
+
+### How It Works
+
+This GitHub Action workflow will deploy a website on your AWS instance using NGINX.
+
+## Self-Hosted Runner Setup
+
+### Steps
+
+1. **Prepare Your AWS Instance**:
+   - If you already have an instance, copy its IP address. If not, create a new instance and copy its IP address.
+
+2. **Configure the Self-Hosted Runner**:
+   - In your GitHub repository, navigate to **Settings** > **Actions** > **Runners**, and click **New self-hosted runner**.
+   </br>
+   
+
+   <img width="1282" alt="image" src="https://github.com/IftachZilcaPaz/ci_cd_github_action_aws/assets/151572520/79e0e497-8600-454b-8e3d-55b37e47583c">
+</br>
+3. **Choose the OS**:
+</br>
+
+   <img width="812" alt="image" src="https://github.com/IftachZilcaPaz/ci_cd_github_action_aws/assets/151572520/5a9775dd-ed99-4aca-b905-14c33d93ec81">
+</br>
+4. **Run the Following Commands on Your Instance**:
+
+## Using the Self-Hosted Runner
 ## Download
 
 ```bash
@@ -76,7 +101,8 @@ those lines will tell the script to run on the instance:
 <br/>
 <br/>
 <br/>
-Diagram:
+
+## Diagram
 
 ```mermaid
 flowchart LR
